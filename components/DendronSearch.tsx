@@ -148,9 +148,8 @@ function DendronSearchComponent(
 
   return (
     <AutoComplete
-      size="large"
+      size="middle"
       allowClear
-      style={{ width: "100%" }}
       value={searchQueryValue}
       // @ts-ignore
       onClick={results === SearchMode.SEARCH_MODE ? () => null : onClickLookup}
@@ -165,11 +164,7 @@ function DendronSearchComponent(
         );
         setSearchQueryValue("");
       }}
-      placeholder={
-        loading
-          ? "Loading Search"
-          : "For full text search please use the '?' prefix. e.g. ? Onboarding"
-      }
+      placeholder={loading ? "Loading Search" : "Full text search ? xxx"}
     >
       {results === SearchMode.SEARCH_MODE
         ? searchResults?.map(({ item: note, matches }) => {
@@ -178,7 +173,7 @@ function DendronSearchComponent(
                 <Row justify="center" align="middle">
                   <Col xs={0} md={1}>
                     <div style={{ position: "relative", top: -12, left: 0 }}>
-                      <FileTextOutlined style={{ color: "#43B02A" }} />
+                      <FileTextOutlined style={{ color: "#B18C67" }} />
                     </div>
                   </Col>
                   <Col

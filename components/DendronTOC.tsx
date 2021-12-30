@@ -1,7 +1,7 @@
 import { NoteProps } from "@dendronhq/common-all";
 import { Anchor } from "antd";
 import _ from "lodash";
-import { ComponentProps } from "react";
+import { ComponentProps, useEffect, useState } from "react";
 
 const Link = Anchor.Link;
 
@@ -21,19 +21,47 @@ export const DendronTOC = ({
 }: {
   note: NoteProps;
 } & ComponentProps<typeof Anchor>) => {
+  const [targetOffset, setTargetOffset] = useState<number | undefined>(
+    undefined
+  );
+  useEffect(() => {
+    setTargetOffset(window.innerHeight / 2);
+  }, []);
   return (
     <>
-      <Anchor style={{ zIndex: 1 }} className="dendron-toc" {...rest}>
-        {Object.entries(note?.anchors).map(([key, entry]) =>
-          entry?.type === "header" ? (
-            <Link
-              href={`#${key}`}
-              title={unslug(entry?.text ?? entry?.value)}
-            />
-          ) : (
-            <></>
-          )
-        )}
+      <Anchor
+        style={{ zIndex: 1 }}
+        className="dendron-toc"
+        {...rest}
+        targetOffset={targetOffset}
+      >
+        {Object.entries(note?.anchors).map(([key, entry]) => {
+          let component;
+          if (entry?.type === "header") {
+            if (entry?.depth > 2) {
+              component = (
+                <div style={{ paddingLeft: "20px" }}>
+                  <Link
+                    href={`#${key}`}
+                    title={unslug(entry?.text ?? entry?.value)}
+                  ></Link>
+                </div>
+              );
+            } else {
+              component = (
+                <div>
+                  <Link
+                    href={`#${key}`}
+                    title={unslug(entry?.text ?? entry?.value)}
+                  ></Link>
+                </div>
+              );
+            }
+          } else {
+            return <></>;
+          }
+          return component;
+        })}
         {note?.links?.length > 0 &&
         note?.links.some((link) => link.type === "backlink") ? (
           <Link href="#backlinks" title="Backlinks" />

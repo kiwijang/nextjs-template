@@ -64,14 +64,14 @@ export default function DendronLayout(
         <DendronBreadCrumb {...props} />
         {props.children}
       </Content>
-      <Divider />
+      <Row style={{ padding: `0 ${LAYOUT.PADDING}px` }}>
+        <FooterText></FooterText>
+      </Row>
       <Footer
         style={{
           padding: `0 ${LAYOUT.PADDING}px ${LAYOUT.PADDING}px`,
         }}
-      >
-        <FooterText />
-      </Footer>
+      ></Footer>
     </>
   );
 
@@ -111,7 +111,7 @@ export default function DendronLayout(
           isolation: "isolate",
           zIndex: 1,
           width: "100%",
-          borderBottom: "1px solid #d4dadf",
+          boxShadow: "0px 0px 2px 0px #000000",
           height: HEADER.HEIGHT,
           padding: isResponsive ? 0 : `0 ${LAYOUT.PADDING}px 0 2px`,
         }}
@@ -120,17 +120,14 @@ export default function DendronLayout(
           justify="center"
           style={{
             maxWidth: "992px",
-            justifyContent: "space-between",
-            margin: "0 auto",
           }}
         >
-          <Col xs={4}>
-            <DendronLogoOrTitle />
-          </Col>
           <Col xs={0} sm={20} md={20} lg={19} className="gutter-row">
             <DendronSearch {...props} />
           </Col>
-          <Col xs={12} />
+          <Col xs={4}>
+            <DendronLogoOrTitle />
+          </Col>
           <Col
             xs={4}
             sm={4}
@@ -153,7 +150,7 @@ export default function DendronLayout(
       <Layout
         className="site-layout"
         style={{
-          marginTop: 64,
+          marginTop: HEADER.HEIGHT,
         }}
       >
         <Layout className="site-layout" style={{ flexDirection: "row" }}>
@@ -161,7 +158,7 @@ export default function DendronLayout(
             className="site-layout-sidebar"
             style={{
               flex: "0 0 auto",
-              width: `calc((100% - ${LAYOUT.BREAKPOINTS.lg}) / 2 + ${
+              width: `calc((100% - ${LAYOUT.BREAKPOINTS.xl}) / 2 + ${
                 // eslint-disable-next-line no-nested-ternary
                 isResponsive
                   ? isCollapsed
@@ -170,7 +167,7 @@ export default function DendronLayout(
                   : SIDER.WIDTH
               }px)`,
               minWidth: isResponsive || isCollapsed ? 0 : SIDER.WIDTH,
-              paddingLeft: `calc((100% - ${LAYOUT.BREAKPOINTS.lg}) / 2)`,
+              paddingLeft: `calc((100% - ${LAYOUT.BREAKPOINTS.xl}) / 2)`,
               // eslint-disable-next-line no-nested-ternary
             }}
           >

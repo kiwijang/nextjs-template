@@ -19,7 +19,6 @@ export default function DendronLogoOrTitle() {
         style={{
           display: "inline-block",
           height: DENDRON_STYLE_CONSTANTS.HEADER.HEIGHT,
-          padding: "4px",
         }}
         className="site-title"
       >

@@ -12,7 +12,7 @@ const SIDER = {
 };
 
 const HEADER = {
-  HEIGHT: 64,
+  HEIGHT: 50,
 };
 
 const LAYOUT = {

@@ -19,7 +19,11 @@ const { Text, Link } = Typography;
 
 const ms2ShortDate = (ts: number) => {
   const dt = Time.DateTime.fromMillis(ts);
-  return dt.toLocaleString(Time.DateTime.DATE_SHORT);
+  return (
+    dt.toLocaleString(Time.DateTime.DATE_MED) +
+    " " +
+    dt.toLocaleString(Time.DateTime.TIME_24_SIMPLE)
+  );
 };
 
 const formatString = (opts: { txt: string; note: NoteProps }) => {
@@ -125,35 +129,15 @@ export function FooterText() {
 
   const { siteLastModified, gh_edit_link_text } = config.site;
   const lastUpdated = ms2ShortDate(noteActive.updated);
+  const created = ms2ShortDate(noteActive.created);
   return (
     <Row>
-      <Row>
-        <Col sm={24} md={14}>
-          {siteLastModified && (
-            <Text type="secondary">
-              Page last modified: {lastUpdated} {"   "}
-            </Text>
-          )}
-        </Col>
-        <Col sm={24} md={12}>
-          {GitUtils.canShowGitLink({ config, note: noteActive }) && (
-            <Link
-              href={GitUtils.githubUrl({ note: noteActive, config })}
-              target="_blank"
-            >
-              {gh_edit_link_text}
-            </Link>
-          )}
-        </Col>
-      </Row>
-      <Col sm={24} md={12} style={{ textAlign: "right" }}>
-        <Text>
-          {" "}
-          🌱 with 💕 using{" "}
-          <Link href="https://www.dendron.so/" target="_blank">
-            Dendron 🌲
-          </Link>
-        </Text>
+      <Col sm={24} md={24}>
+        {siteLastModified && (
+          <Text type="secondary">
+            首次新增 {created} | 最後編輯 {lastUpdated}
+          </Text>
+        )}
       </Col>
     </Row>
   );
