@@ -116,3 +116,45 @@ $text-color: "rgba(0,0,0,.85)"; // @text-color
     white-space: normal;
   }
 }
+
+.main-content {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    text-transform: capitalize;
+  }
+}
+
+.main-content h3 {
+  border-left: 15px solid #775e3b;
+  padding-left: 5px;
+  margin-bottom: 12px;
+  font-weight: 800;
+}
+
+.main-content h2 {
+  font-weight: 600;
+}
+
+.main-content img {
+  border: 5px solid black;
+}
+
+p code,
+li code {
+  background-color: #f5f6fa;
+  padding: 5px 10px;
+  border-radius: 3px;
+  font-size: 14px;
+  margin: 0 2px;
+  color: indianred;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+  background: #f5f6fa;
+  border-radius: 3px;
+  padding: 0px;
+}
