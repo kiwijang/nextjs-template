@@ -4,7 +4,7 @@ import {
   DendronNote,
   LoadingStatus,
 } from "@dendronhq/common-frontend";
-import { Col, Row } from "antd";
+import { Col, Divider, Row } from "antd";
 import _ from "lodash";
 import React from "react";
 import { DendronCollectionItem } from "../components/DendronCollection";
@@ -16,6 +16,7 @@ import { useCombinedDispatch, useCombinedSelector } from "../features";
 import { browserEngineSlice } from "../features/engine";
 import { DENDRON_STYLE_CONSTANTS } from "../styles/constants";
 import { useDendronRouter, useIsMobile } from "../utils/hooks";
+import DisqusComments from "./Disqus";
 
 const { HEADER } = DENDRON_STYLE_CONSTANTS;
 
@@ -106,6 +107,11 @@ export default function Note({
             </Col>
             <Col xs={0} md={6}>
               <DendronTOC note={note} offsetTop={HEADER.HEIGHT} />
+            </Col>
+            <Col xs={24} md={18}>
+              <Divider dashed />
+              <DisqusComments note={note}></DisqusComments>
+              <Divider dashed />
             </Col>
           </Row>
         </Col>
