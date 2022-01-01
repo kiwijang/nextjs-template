@@ -1,7 +1,7 @@
 import { verifyEngineSliceState } from "@dendronhq/common-frontend";
+import { Col, Divider } from "antd";
 import { DiscussionEmbed } from "disqus-react";
 import { useEngineAppSelector } from "../features/engine/hooks";
-import { useDendronRouter } from "../utils/hooks";
 import { getRootUrl } from "../utils/links";
 
 const DisqusComments = (noteObj: any) => {
@@ -11,8 +11,13 @@ const DisqusComments = (noteObj: any) => {
   }
   const url = getRootUrl(engine.config.site);
   const { note } = noteObj;
-  console.log(note);
-  if (!note.id) {
+  // console.log(note);
+  if (
+    !note.id ||
+    note.id === "root" ||
+    note.parent === "root" ||
+    note.custom?.stub === true
+  ) {
     return <></>;
   }
 
@@ -23,9 +28,13 @@ const DisqusComments = (noteObj: any) => {
     title: note.title, // Single post title
   };
   return (
-    <div>
-      <DiscussionEmbed shortname={disqusShortname} config={disqusConfig} />
-    </div>
+    <Col xs={24} md={18}>
+      <Divider dashed />
+      <div>
+        <DiscussionEmbed shortname={disqusShortname} config={disqusConfig} />
+      </div>
+      <Divider dashed />
+    </Col>
   );
 };
 export default DisqusComments;

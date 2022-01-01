@@ -4,7 +4,7 @@ import {
   DendronNote,
   LoadingStatus,
 } from "@dendronhq/common-frontend";
-import { Col, Divider, Row } from "antd";
+import { Col, Row } from "antd";
 import _ from "lodash";
 import React from "react";
 import { DendronCollectionItem } from "../components/DendronCollection";
@@ -108,11 +108,7 @@ export default function Note({
             <Col xs={0} md={6}>
               <DendronTOC note={note} offsetTop={HEADER.HEIGHT} />
             </Col>
-            <Col xs={24} md={18}>
-              <Divider dashed />
-              <DisqusComments note={note}></DisqusComments>
-              <Divider dashed />
-            </Col>
+            <DisqusComments note={note}></DisqusComments>
           </Row>
         </Col>
       </Row>
