@@ -16,7 +16,8 @@ const DisqusComments = (noteObj: any) => {
     !note.id ||
     note.id === "root" ||
     note.parent === "root" ||
-    note.custom?.stub === true
+    note.custom?.stub === true ||
+    note.id === "03vN8OL5CrZW9GX2NX7oS"
   ) {
     return <></>;
   }
