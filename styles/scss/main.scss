@@ -152,9 +152,17 @@ li code {
   color: indianred;
 }
 
-:not(pre) > code[class*="language-"],
-pre[class*="language-"] {
+pre > code[class*="language-"] {
   background: #f5f6fa;
   border-radius: 3px;
-  padding: 0px;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+pre[class*="language-"] {
+  margin: 10px 10px 10px 0 !important;
+}
+
+hr {
+  border: 0;
+  border-bottom: 2px solid #ccc;
 }
