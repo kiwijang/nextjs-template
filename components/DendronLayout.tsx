@@ -1,16 +1,16 @@
-import { MenuOutlined } from "@ant-design/icons";
-import { ConfigUtils, IntermediateDendronConfig } from "@dendronhq/common-all";
-import { Col, Divider, Layout, Row } from "antd";
-import Script from "next/script";
-import * as React from "react";
-import { useEngineAppSelector } from "../features/engine/hooks";
-import { DENDRON_STYLE_CONSTANTS } from "../styles/constants";
-import { DendronCommonProps } from "../utils/types";
-import { DendronBreadCrumb } from "./DendronBreadCrumb";
-import DendronLogoOrTitle from "./DendronLogoOrTitle";
-import { FooterText } from "./DendronNoteFooter";
-import { DendronSearch } from "./DendronSearch";
-import DendronTreeMenu from "./DendronTreeMenu";
+import { MenuOutlined } from '@ant-design/icons';
+import { ConfigUtils, IntermediateDendronConfig } from '@dendronhq/common-all';
+import { Col, Layout, Row } from 'antd';
+import Script from 'next/script';
+import * as React from 'react';
+import { useEngineAppSelector } from '../features/engine/hooks';
+import { DENDRON_STYLE_CONSTANTS } from '../styles/constants';
+import { DendronCommonProps } from '../utils/types';
+import { DendronBreadCrumb } from './DendronBreadCrumb';
+import DendronLogoOrTitle from './DendronLogoOrTitle';
+import { FooterText } from './DendronNoteFooter';
+import { DendronSearch } from './DendronSearch';
+import DendronTreeMenu from './DendronTreeMenu';
 
 const { Header, Content, Sider, Footer } = Layout;
 const { LAYOUT, HEADER, SIDER } = DENDRON_STYLE_CONSTANTS;
@@ -23,7 +23,7 @@ export default function DendronLayout(
 
   const sidebar = (
     <Sider
-      width={isResponsive ? "100%" : SIDER.WIDTH}
+      width={isResponsive ? '100%' : SIDER.WIDTH}
       collapsible
       collapsed={isCollapsed && isResponsive}
       collapsedWidth={SIDER.COLLAPSED_WIDTH}
@@ -35,8 +35,8 @@ export default function DendronLayout(
         setResponsive(broken);
       }}
       style={{
-        position: "fixed",
-        overflow: "auto",
+        position: 'fixed',
+        overflow: 'auto',
         height: `calc(100vh - ${HEADER.HEIGHT}px)`,
       }}
       trigger={null}
@@ -77,13 +77,13 @@ export default function DendronLayout(
 
   const engine = useEngineAppSelector((state) => state.engine);
   const config = engine.config as IntermediateDendronConfig;
-  const enableMermaid = ConfigUtils.getProp(config, "mermaid");
+  const enableMermaid = ConfigUtils.getProp(config, 'mermaid');
 
   return (
     <Layout
       style={{
-        width: "100%",
-        minHeight: "100%",
+        width: '100%',
+        minHeight: '100%',
       }}
     >
       {enableMermaid && (
@@ -107,11 +107,12 @@ export default function DendronLayout(
       )}
       <Header
         style={{
-          position: "fixed",
-          isolation: "isolate",
+          position: 'sticky',
+          top: 0,
+          isolation: 'isolate',
           zIndex: 1,
-          width: "100%",
-          boxShadow: "0px 0px 2px 0px #000000",
+          width: '100%',
+          boxShadow: '0px 0px 2px 0px #000000',
           height: HEADER.HEIGHT,
           padding: isResponsive ? 0 : `0 ${LAYOUT.PADDING}px 0 2px`,
         }}
@@ -119,10 +120,17 @@ export default function DendronLayout(
         <Row
           justify="center"
           style={{
-            maxWidth: "992px",
+            maxWidth: '992px',
           }}
         >
-          <Col xs={0} sm={20} md={20} lg={19} className="gutter-row">
+          <Col
+            xs={0}
+            sm={20}
+            md={20}
+            lg={19}
+            className="gutter-row"
+            id="my-search"
+          >
             <DendronSearch {...props} />
           </Col>
           <Col xs={4}>
@@ -134,10 +142,10 @@ export default function DendronLayout(
             md={0}
             lg={0}
             style={{
-              marginLeft: "4px",
-              display: isResponsive ? "flex" : "none",
-              alignItems: "center",
-              justifyContent: "center",
+              marginLeft: '4px',
+              display: isResponsive ? 'flex' : 'none',
+              alignItems: 'center',
+              justifyContent: 'center',
             }}
           >
             <MenuOutlined
@@ -147,23 +155,18 @@ export default function DendronLayout(
           </Col>
         </Row>
       </Header>
-      <Layout
-        className="site-layout"
-        style={{
-          marginTop: HEADER.HEIGHT,
-        }}
-      >
-        <Layout className="site-layout" style={{ flexDirection: "row" }}>
+      <Layout className="site-layout">
+        <Layout className="site-layout" style={{ flexDirection: 'row' }}>
           <Layout
             className="site-layout-sidebar"
             style={{
-              flex: "0 0 auto",
+              flex: '0 0 auto',
               width: `calc((100% - ${LAYOUT.BREAKPOINTS.xl}) / 2 + ${
                 // eslint-disable-next-line no-nested-ternary
                 isResponsive
                   ? isCollapsed
                     ? SIDER.COLLAPSED_WIDTH
-                    : "100%"
+                    : '100%'
                   : SIDER.WIDTH
               }px)`,
               minWidth: isResponsive || isCollapsed ? 0 : SIDER.WIDTH,
@@ -176,8 +179,8 @@ export default function DendronLayout(
           <Layout
             className="side-layout-main"
             style={{
-              maxWidth: "1200px",
-              display: !isCollapsed && isResponsive ? "none" : "initial",
+              maxWidth: '1200px',
+              display: !isCollapsed && isResponsive ? 'none' : 'initial',
             }}
           >
             {content}
