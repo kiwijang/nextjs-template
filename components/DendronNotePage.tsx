@@ -1,22 +1,22 @@
-import { IntermediateDendronConfig, NoteProps } from "@dendronhq/common-all";
+import { IntermediateDendronConfig, NoteProps } from '@dendronhq/common-all';
 import {
   createLogger,
   DendronNote,
   LoadingStatus,
-} from "@dendronhq/common-frontend";
-import { Col, Row } from "antd";
-import _ from "lodash";
-import React from "react";
-import { DendronCollectionItem } from "../components/DendronCollection";
-import DendronCustomHead from "../components/DendronCustomHead";
-import DendronSEO from "../components/DendronSEO";
-import DendronSpinner from "../components/DendronSpinner";
-import { DendronTOC } from "../components/DendronTOC";
-import { useCombinedDispatch, useCombinedSelector } from "../features";
-import { browserEngineSlice } from "../features/engine";
-import { DENDRON_STYLE_CONSTANTS } from "../styles/constants";
-import { useDendronRouter, useIsMobile } from "../utils/hooks";
-import DisqusComments from "./Disqus";
+} from '@dendronhq/common-frontend';
+import { Col, Row } from 'antd';
+import _ from 'lodash';
+import React from 'react';
+import { DendronCollectionItem } from '../components/DendronCollection';
+import DendronCustomHead from '../components/DendronCustomHead';
+import DendronSEO from '../components/DendronSEO';
+import DendronSpinner from '../components/DendronSpinner';
+import { DendronTOC } from '../components/DendronTOC';
+import { useCombinedDispatch, useCombinedSelector } from '../features';
+import { browserEngineSlice } from '../features/engine';
+import { DENDRON_STYLE_CONSTANTS } from '../styles/constants';
+import { useDendronRouter, useIsMobile } from '../utils/hooks';
+import DisqusComments from './Disqus';
 
 const { HEADER } = DENDRON_STYLE_CONSTANTS;
 
@@ -38,27 +38,27 @@ export default function Note({
   customHeadContent,
   config,
 }: DendronNotePageProps) {
-  const logger = createLogger("Note");
+  const logger = createLogger('Note');
   const { getActiveNoteId } = useDendronRouter();
   const [bodyFromState, setBody] = React.useState<string | undefined>(
     undefined
   );
   let id = getActiveNoteId();
-  if (id === "root") {
+  if (id === 'root') {
     id = noteIndex.id;
   }
 
   // --- Hooks
   const dispatch = useCombinedDispatch();
   const engine = useCombinedSelector((state) => state.engine);
-  logger.info({ ctx: "enter", id });
+  logger.info({ ctx: 'enter', id });
   const { isMobile } = useIsMobile();
 
   // setup body
   React.useEffect(() => {
-    logger.info({ ctx: "updateNoteBody:enter", id });
+    logger.info({ ctx: 'updateNoteBody:enter', id });
     if (_.isUndefined(id)) {
-      logger.info({ ctx: "updateNoteBody:exit", id, state: "id undefined" });
+      logger.info({ ctx: 'updateNoteBody:exit', id, state: 'id undefined' });
       return;
     }
     // loaded page statically
@@ -66,13 +66,13 @@ export default function Note({
       dispatch(
         browserEngineSlice.actions.setLoadingStatus(LoadingStatus.FULFILLED)
       );
-      logger.info({ ctx: "updateNoteBody:exit", id, state: "id = note.id" });
+      logger.info({ ctx: 'updateNoteBody:exit', id, state: 'id = note.id' });
       return;
     }
-    logger.info({ ctx: "updateNoteBody:fetch:pre", id });
+    logger.info({ ctx: 'updateNoteBody:fetch:pre', id });
     // otherwise, dynamically fetch page
     fetch(`/data/notes/${id}.html`).then(async (resp) => {
-      logger.info({ ctx: "updateNoteBody:fetch:post", id });
+      logger.info({ ctx: 'updateNoteBody:fetch:post', id });
       const contents = await resp.text();
       setBody(contents);
       dispatch(
@@ -100,9 +100,11 @@ export default function Note({
       {customHeadContent && <DendronCustomHead content={customHeadContent} />}
       <Row>
         <Col span={24}>
-          <Row gutter={20}>
+          <Row>
             <Col xs={24} md={18}>
-              <DendronNote noteContent={noteBody} config={config} />
+              <div style={{ paddingRight: '24px' }}>
+                <DendronNote noteContent={noteBody} config={config} />
+              </div>
               {maybeCollection}
             </Col>
             <Col xs={0} md={6}>

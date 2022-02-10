@@ -54,12 +54,12 @@ export default function DendronLayout(
       <Content
         className="main-content"
         role="main"
-        style={{ padding: `0 ${LAYOUT.PADDING}px` }}
+        style={{ paddingLeft: `${LAYOUT.PADDING}px` }}
       >
         <DendronBreadCrumb {...props} />
         {props.children}
       </Content>
-      <Row style={{ padding: `0 ${LAYOUT.PADDING}px` }}>
+      <Row style={{ paddingLeft: `${LAYOUT.PADDING}px` }}>
         <FooterText></FooterText>
       </Row>
       <Footer
@@ -110,15 +110,9 @@ export default function DendronLayout(
           width: '100%',
           boxShadow: '0px 0px 2px 0px #000000',
           height: HEADER.HEIGHT,
-          padding: isResponsive ? 0 : `0 ${LAYOUT.PADDING}px 0 2px`,
         }}
       >
-        <Row
-          justify="center"
-          style={{
-            maxWidth: '992px',
-          }}
-        >
+        <Row justify="center">
           <Col
             xs={0}
             sm={20}
@@ -132,7 +126,7 @@ export default function DendronLayout(
           >
             <DendronSearch {...props} />
           </Col>
-          <Col xs={4}>
+          <Col xs={6}>
             <DendronLogoOrTitle />
           </Col>
           <Col
@@ -148,7 +142,7 @@ export default function DendronLayout(
             }}
           >
             <MenuOutlined
-              style={{ fontSize: 24 }}
+              style={{ fontSize: 24, color: 'lightgrey' }}
               onClick={() => setCollapsed(!isCollapsed)}
             />
           </Col>
@@ -178,7 +172,14 @@ export default function DendronLayout(
           <Layout
             className="side-layout-main"
             style={{
-              maxWidth: '1200px',
+              maxWidth: `calc(100% - ${
+                // eslint-disable-next-line no-nested-ternary
+                isResponsive
+                  ? isCollapsed
+                    ? SIDER.COLLAPSED_WIDTH + 24
+                    : '100%'
+                  : SIDER.WIDTH + 24
+              }px)`,
               display: !isCollapsed && isResponsive ? 'none' : 'initial',
             }}
           >

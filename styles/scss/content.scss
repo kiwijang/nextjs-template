@@ -23,6 +23,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     // white-space: nowrap;
+    word-break: break-all;
   }
 
   // For links to tag notes where we want to display a tag color.
@@ -31,7 +32,7 @@
   @supports not (-ms-high-contrast: none) {
     .color-tag::before {
       // Need these to force the browser into rendering this empty box
-      content: " ";
+      content: ' ';
       display: inline-block;
       // The actual style of the tag color box
       width: 0.8rem;
@@ -95,7 +96,7 @@
         position: absolute;
         margin-left: -1.4em;
         color: $grey-dk-000;
-        content: "•";
+        content: '•';
       }
     }
   }
@@ -108,7 +109,7 @@
     align-items: center;
 
     &::before {
-      content: "";
+      content: '';
     }
   }
 
@@ -138,7 +139,7 @@
     text-align: right;
 
     &::after {
-      content: ":";
+      content: ':';
     }
   }
 
@@ -233,7 +234,7 @@ blockquote {
     font-style: italic;
 
     &:before {
-      content: "\2014";
+      content: '\2014';
       padding-right: 5px;
     }
   }

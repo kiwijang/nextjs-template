@@ -51,7 +51,7 @@ const DisqusComments = (noteObj: any) => {
   return (
     <Col xs={24} md={18}>
       <Divider dashed />
-      <div>
+      <div style={{ paddingRight: '24px' }}>
         <DiscussionEmbed shortname={disqusShortname} config={disqusConfig} />
       </div>
       <Divider dashed />
