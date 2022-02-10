@@ -115,9 +115,9 @@ export default function DendronLayout(
         <Row justify="center">
           <Col
             xs={0}
-            sm={20}
-            md={20}
-            lg={19}
+            sm={18}
+            md={18}
+            lg={16}
             className="gutter-row"
             id="my-search"
             style={{
