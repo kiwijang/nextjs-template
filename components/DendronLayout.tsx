@@ -41,11 +41,6 @@ export default function DendronLayout(
       }}
       trigger={null}
     >
-      {isResponsive && (
-        <div style={{ padding: 16 }}>
-          <DendronSearch {...props} />
-        </div>
-      )}
       <DendronTreeMenu
         {...props}
         collapsed={isCollapsed && isResponsive}
@@ -84,6 +79,7 @@ export default function DendronLayout(
       style={{
         width: '100%',
         minHeight: '100%',
+        minWidth: '310px',
       }}
     >
       {enableMermaid && (
@@ -130,6 +126,9 @@ export default function DendronLayout(
             lg={19}
             className="gutter-row"
             id="my-search"
+            style={{
+              maxWidth: '992px',
+            }}
           >
             <DendronSearch {...props} />
           </Col>
