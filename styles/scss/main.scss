@@ -1,24 +1,24 @@
 //
 // Base
 //
-@import "./support/support";
+@import './support/support';
 
 //
 // Modules
 //
-@import "./variables";
-@import "./base";
-@import "./content";
+@import './variables';
+@import './base';
+@import './content';
 // @import "variables.scss";
-@import "./typography";
-@import "./utilities/utilities";
+@import './typography';
+@import './utilities/utilities';
 
 // Portal Start
 $base-line-height: 1 !default;
 $spacing-unit: 30px !default;
 $text-color: #111 !default;
 // Portal end
-@import "portal.scss";
+@import 'portal.scss';
 
 // TODO: new
 #__next {
@@ -26,7 +26,7 @@ $text-color: #111 !default;
 }
 
 hr {
-  height: "1px";
+  height: '1px';
 }
 
 // Components
@@ -35,7 +35,7 @@ hr {
 
 // from from packages/dendron-next-server/assets/themes/light-theme.less
 $layout-header-background: #f5f7f9; // @layout-header-background
-$text-color: "rgba(0,0,0,.85)"; // @text-color
+$text-color: 'rgba(0,0,0,.85)'; // @text-color
 
 .site-layout-sidebar.ant-layout {
   background-color: $layout-header-background;
@@ -48,7 +48,7 @@ $text-color: "rgba(0,0,0,.85)"; // @text-color
 
 .dendron-tree-menu.ant-menu {
   .ant-menu-submenu-title {
-    [data-expandedicon="true"] {
+    [data-expandedicon='true'] {
       position: absolute;
       top: 0;
       right: 3px;
@@ -68,13 +68,13 @@ $text-color: "rgba(0,0,0,.85)"; // @text-color
     .ant-menu-title-content:hover {
       text-decoration: underline;
     }
-    [data-expandedicon="true"]:hover {
+    [data-expandedicon='true']:hover {
       background-color: rgba(0, 0, 0, 0.05);
     }
   }
 
   &.ant-menu-inline-collapsed {
-    [data-expandedicon="true"] {
+    [data-expandedicon='true'] {
       // remove submenu icon in collapsed Menu for first level
       display: none;
     }
@@ -89,7 +89,7 @@ $text-color: "rgba(0,0,0,.85)"; // @text-color
       border-right: 3px solid #b18c67; // antd's @border-color-split
       transform: scaleY(0.0001);
       opacity: 0;
-      content: "";
+      content: '';
       pointer-events: none; // makes open/close arrows touch-area bigger by giving it "space" to the right from this after element
     }
   }
@@ -139,7 +139,11 @@ $text-color: "rgba(0,0,0,.85)"; // @text-color
 }
 
 .main-content img {
-  border: 5px solid black;
+  box-shadow: 0px 0px 3px 1px #aaa;
+  display: block;
+  border-radius: 12px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 p code,
@@ -152,13 +156,13 @@ li code {
   color: indianred;
 }
 
-pre > code[class*="language-"] {
+pre > code[class*='language-'] {
   background: #f5f6fa;
   border-radius: 3px;
   padding: 0 !important;
   margin: 0 !important;
 }
-pre[class*="language-"] {
+pre[class*='language-'] {
   margin: 10px 10px 10px 0 !important;
 }
 
