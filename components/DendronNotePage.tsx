@@ -18,7 +18,7 @@ import { DENDRON_STYLE_CONSTANTS } from '../styles/constants';
 import { useDendronRouter, useIsMobile } from '../utils/hooks';
 import DisqusComments from './Disqus';
 
-const { HEADER } = DENDRON_STYLE_CONSTANTS;
+const { LAYOUT, HEADER } = DENDRON_STYLE_CONSTANTS;
 
 export type DendronNotePageProps = {
   // `InferGetStaticPropsType` doesn't get right types for some reason, hence the manual override here
@@ -102,7 +102,7 @@ export default function Note({
         <Col span={24}>
           <Row>
             <Col xs={24} md={18}>
-              <div style={{ paddingRight: '24px' }}>
+              <div style={{ paddingRight: `${LAYOUT.PADDING}px` }}>
                 <DendronNote noteContent={noteBody} config={config} />
               </div>
               {maybeCollection}

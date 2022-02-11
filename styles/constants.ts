@@ -16,14 +16,14 @@ const HEADER = {
 };
 
 const LAYOUT = {
-  PADDING: 24,
+  PADDING: 40,
   BREAKPOINTS: {
-    xs: "480px",
-    sm: "576px",
-    md: "768px",
-    lg: "992px",
-    xl: "1200px",
-    xxl: "1600px",
+    xs: '480px',
+    sm: '576px',
+    md: '768px',
+    lg: '992px',
+    xl: '1200px',
+    xxl: '1600px',
   },
   CONTENT_MAX_WIDTH: 960,
 };

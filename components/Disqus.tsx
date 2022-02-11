@@ -2,7 +2,10 @@ import { verifyEngineSliceState } from '@dendronhq/common-frontend';
 import { Col, Divider } from 'antd';
 import { DiscussionEmbed } from 'disqus-react';
 import { useEngineAppSelector } from '../features/engine/hooks';
+import { DENDRON_STYLE_CONSTANTS } from '../styles/constants';
 import { getRootUrl } from '../utils/links';
+
+const { LAYOUT } = DENDRON_STYLE_CONSTANTS;
 
 const DisqusComments = (noteObj: any) => {
   const engine = useEngineAppSelector((state) => state.engine);
@@ -51,7 +54,7 @@ const DisqusComments = (noteObj: any) => {
   return (
     <Col xs={24} md={18}>
       <Divider dashed />
-      <div style={{ paddingRight: '24px' }}>
+      <div style={{ paddingRight: `${LAYOUT.PADDING}px` }}>
         <DiscussionEmbed shortname={disqusShortname} config={disqusConfig} />
       </div>
       <Divider dashed />

@@ -1297,7 +1297,8 @@ ol,
 p,
 ul {
   margin-top: 0;
-  margin-bottom: 1em;
+  margin-bottom: 0;
+  line-height: 2;
 }
 abbr[data-original-title],
 abbr[title] {
@@ -25889,7 +25890,7 @@ div.ant-typography-edit-content.ant-typography-rtl {
 }
 .ant-upload-list-picture .ant-upload-list-item-progress {
   bottom: 14px;
-  width: calc(100% - 24px);
+  width: calc(100% - 40px);
   margin-top: 0;
   padding-left: 56px;
 }
