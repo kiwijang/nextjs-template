@@ -3,23 +3,23 @@ import {
   createLogger,
   Provider,
   setLogLevel,
-} from "@dendronhq/common-frontend";
-import "antd/dist/antd.css";
-import type { AppProps } from "next/app";
-import { useEffect, useState } from "react";
-import { ThemeSwitcherProvider } from "react-css-theme-switcher";
-import { useDendronGATracking } from "../components/DendronGATracking";
-import DendronLayout from "../components/DendronLayout";
-import { combinedStore, useCombinedDispatch } from "../features";
-import { browserEngineSlice } from "../features/engine";
-import "../public/assets-dendron/css/light.css";
-import "../styles/scss/main.scss";
-import { fetchConfig, fetchNotes } from "../utils/fetchers";
-import { useDendronRouter } from "../utils/hooks";
-import { getAssetUrl } from "../utils/links";
-import { NoteData } from "../utils/types";
-import Head from "next/head";
-import { getLogLevel } from "../utils/etc";
+} from '@dendronhq/common-frontend';
+import 'antd/dist/antd.css';
+import type { AppProps } from 'next/app';
+import { useEffect, useState } from 'react';
+import { ThemeSwitcherProvider } from 'react-css-theme-switcher';
+import { useDendronGATracking } from '../components/DendronGATracking';
+import DendronLayout from '../components/DendronLayout';
+import { combinedStore, useCombinedDispatch } from '../features';
+import { browserEngineSlice } from '../features/engine';
+import '../public/assets-dendron/css/light.css';
+import '../styles/scss/main.scss';
+import { fetchConfig, fetchNotes } from '../utils/fetchers';
+import { useDendronRouter } from '../utils/hooks';
+import { getAssetUrl } from '../utils/links';
+import { NoteData } from '../utils/types';
+import Head from 'next/head';
+import { getLogLevel } from '../utils/etc';
 
 const themes = {
   dark: getAssetUrl(`/assets-dendron/css/dark.css`),
@@ -27,10 +27,14 @@ const themes = {
 };
 
 function AppContainer(appProps: AppProps) {
-  const defaultTheme = "light";
+  const defaultTheme = 'light';
   return (
     <Provider store={combinedStore}>
       <ThemeSwitcherProvider themeMap={themes} defaultTheme={defaultTheme}>
+        <div id="__nextLayout">
+          <div className="circle c5"></div>
+          <div className="circle c5"></div>
+        </div>
         <DendronApp {...appProps} />
       </ThemeSwitcherProvider>
     </Provider>
@@ -39,7 +43,7 @@ function AppContainer(appProps: AppProps) {
 
 function DendronApp({ Component, pageProps }: AppProps) {
   const [noteData, setNoteData] = useState<NoteData>();
-  const logger = createLogger("App");
+  const logger = createLogger('App');
   const dendronRouter = useDendronRouter();
   const dispatch = useCombinedDispatch();
   useDendronGATracking();
@@ -48,26 +52,31 @@ function DendronApp({ Component, pageProps }: AppProps) {
     (async () => {
       const logLevel = getLogLevel();
       setLogLevel(logLevel);
-      logger.info({ ctx: "fetchNotes:pre" });
+      logger.info({ ctx: 'fetchNotes:pre' });
       const data = await fetchNotes();
-      logger.info({ ctx: "fetchNotes:got-data" });
+      logger.info({ ctx: 'fetchNotes:got-data' });
       setNoteData(data);
       batch(() => {
         dispatch(browserEngineSlice.actions.setNotes(data.notes));
         dispatch(browserEngineSlice.actions.setNoteIndex(data.noteIndex));
       });
       const config = await fetchConfig();
-      logger.info({ ctx: "fetchConfig:got-data" });
+      logger.info({ ctx: 'fetchConfig:got-data' });
       dispatch(browserEngineSlice.actions.setConfig(config));
     })();
   }, []);
 
-  logger.info({ ctx: "render" });
+  logger.info({ ctx: 'render' });
 
   return (
     <DendronLayout {...noteData} dendronRouter={dendronRouter}>
       <Head>
         <link rel="icon" href="/favicon.ico" />
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5555097176407757"
+          crossOrigin="anonymous"
+        ></script>
       </Head>
       <Component
         {...pageProps}

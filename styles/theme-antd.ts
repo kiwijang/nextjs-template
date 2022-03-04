@@ -1,4 +1,4 @@
-import _ from "lodash";
+import _ from 'lodash';
 
 export type Theme = {
   graph: {
@@ -33,26 +33,26 @@ const baseTheme: Theme = {
   graph: {
     node: {
       size: 5,
-      color: "",
+      color: '',
       label: {
         fontSize: 10,
         minZoomedFontSize: 10,
         fontWeight: 400,
-        color: "",
+        color: '',
       },
       _selected: {
-        color: "",
+        color: '',
       },
     },
     edge: {
       width: 0.25,
-      color: "",
+      color: '',
     },
     filterView: {
-      margin: "1rem",
-      minWidth: "12rem",
+      margin: '1rem',
+      minWidth: '12rem',
       borderRadius: 4,
-      background: "",
+      background: '',
     },
   },
 };
@@ -60,24 +60,24 @@ const baseTheme: Theme = {
 const darkTheme: Theme = {
   graph: {
     node: {
-      color: "#B3ABAB",
+      color: '#B3ABAB',
       size: baseTheme.graph.node.size,
       label: {
-        color: "#ffffff",
+        color: '#ffffff',
         fontSize: baseTheme.graph.node.label.fontSize,
         minZoomedFontSize: baseTheme.graph.node.label.minZoomedFontSize,
         fontWeight: baseTheme.graph.node.label.fontWeight,
       },
       _selected: {
-        color: "#36B73B",
+        color: '#E1DCD6',
       },
     },
     edge: {
-      color: "#B3ABAB",
+      color: '#B3ABAB',
       width: baseTheme.graph.edge.width,
     },
     filterView: {
-      background: "#303030",
+      background: '#303030',
       margin: baseTheme.graph.filterView.margin,
       minWidth: baseTheme.graph.filterView.minWidth,
       borderRadius: baseTheme.graph.filterView.borderRadius,
@@ -88,24 +88,24 @@ const darkTheme: Theme = {
 const lightTheme: Theme = {
   graph: {
     node: {
-      color: "#666161",
+      color: '#666161',
       size: baseTheme.graph.node.size,
       label: {
-        color: "#2F3438",
+        color: '#2F3438',
         fontSize: baseTheme.graph.node.label.fontSize,
         minZoomedFontSize: baseTheme.graph.node.label.minZoomedFontSize,
         fontWeight: baseTheme.graph.node.label.fontWeight,
       },
       _selected: {
-        color: "#27AC2C",
+        color: '#E1DCD6',
       },
     },
     edge: {
-      color: "#666161",
+      color: '#666161',
       width: baseTheme.graph.edge.width,
     },
     filterView: {
-      background: "#F5F6F8",
+      background: '#F5F6F8',
       margin: baseTheme.graph.filterView.margin,
       minWidth: baseTheme.graph.filterView.minWidth,
       borderRadius: baseTheme.graph.filterView.borderRadius,
