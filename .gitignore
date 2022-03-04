@@ -40,7 +40,7 @@ public/logo.*
 local
 
 # generated
-robots.txt
-sitemap.xml
+# robots.txt
+# sitemap.xml
 public/*.html
 dist
