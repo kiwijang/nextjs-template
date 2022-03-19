@@ -1,14 +1,15 @@
-import { GetStaticProps, GetStaticPropsContext } from "next";
-import { prepChildrenForCollection } from "../components/DendronCollection";
+import { GetStaticProps, GetStaticPropsContext } from 'next';
+import { prepChildrenForCollection } from '../components/DendronCollection';
 import DendronNotePage, {
   DendronNotePageProps,
-} from "../components/DendronNotePage";
+  genLatestThreeThen,
+} from '../components/DendronNotePage';
 import {
   getConfig,
   getCustomHead,
   getNoteBody,
   getNotes,
-} from "../utils/build";
+} from '../utils/build';
 
 export default DendronNotePage;
 export const getStaticProps: GetStaticProps = async (
@@ -21,6 +22,7 @@ export const getStaticProps: GetStaticProps = async (
   const collectionChildren = note.custom?.has_collection
     ? prepChildrenForCollection(note, notes, note)
     : null;
+  const rootBody = await genLatestThreeThen(notes, 'root', 'root');
   const props: DendronNotePageProps = {
     body,
     note,
@@ -28,6 +30,7 @@ export const getStaticProps: GetStaticProps = async (
     customHeadContent,
     noteIndex: note,
     collectionChildren,
+    rootBody,
   };
   return {
     props,

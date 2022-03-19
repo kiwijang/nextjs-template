@@ -1,4 +1,8 @@
-import { IntermediateDendronConfig, NoteProps } from '@dendronhq/common-all';
+import {
+  IntermediateDendronConfig,
+  NoteProps,
+  NotePropsDict,
+} from '@dendronhq/common-all';
 import {
   createLogger,
   DendronNote,
@@ -28,6 +32,7 @@ export type DendronNotePageProps = {
   body: string;
   collectionChildren: NoteProps[] | null;
   config: IntermediateDendronConfig;
+  rootBody?: string;
 };
 
 export default function Note({
@@ -37,6 +42,7 @@ export default function Note({
   noteIndex,
   customHeadContent,
   config,
+  rootBody,
 }: DendronNotePageProps) {
   const logger = createLogger('Note');
   const { getActiveNoteId } = useDendronRouter();
@@ -44,7 +50,9 @@ export default function Note({
     undefined
   );
   let id = getActiveNoteId();
+  let rootId = '';
   if (id === 'root') {
+    rootId = id;
     id = noteIndex.id;
   }
 
@@ -81,7 +89,7 @@ export default function Note({
     });
   }, [id]);
 
-  const noteBody = id === note.id ? body : bodyFromState;
+  let noteBody = id === note.id ? body : bodyFromState;
 
   if (_.isUndefined(noteBody)) {
     return <DendronSpinner />;
@@ -94,26 +102,216 @@ export default function Note({
         )
       : null;
 
-  return (
-    <>
-      <DendronSEO note={note} config={config} />
-      {customHeadContent && <DendronCustomHead content={customHeadContent} />}
-      <Row>
-        <Col span={24}>
-          <Row>
-            <Col xs={24} md={18}>
-              <div style={{ paddingRight: `${LAYOUT.PADDING}px` }}>
-                <DendronNote noteContent={noteBody} config={config} />
-              </div>
-              {maybeCollection}
-            </Col>
-            <Col xs={0} md={6}>
-              <DendronTOC note={note} offsetTop={HEADER.HEIGHT} />
-            </Col>
-            <DisqusComments note={note}></DisqusComments>
-          </Row>
-        </Col>
-      </Row>
-    </>
-  );
+  if (id === rootId) {
+    return (
+      <>
+        <DendronSEO note={note} config={config} />
+        {customHeadContent && <DendronCustomHead content={customHeadContent} />}
+        <Row>
+          <Col span={24}>
+            <Row>
+              <Col xs={24} md={18}>
+                <div style={{ paddingRight: `${LAYOUT.PADDING}px` }}>
+                  <DendronNote
+                    noteContent={rootBody ? rootBody : ''}
+                    config={config}
+                  />
+                </div>
+                {maybeCollection}
+              </Col>
+              <Col xs={0} md={6}>
+                <DendronTOC note={note} offsetTop={HEADER.HEIGHT} />
+              </Col>
+              <DisqusComments note={note}></DisqusComments>
+            </Row>
+          </Col>
+        </Row>
+      </>
+    );
+  } else {
+    return (
+      <>
+        <DendronSEO note={note} config={config} />
+        {customHeadContent && <DendronCustomHead content={customHeadContent} />}
+        <Row>
+          <Col span={24}>
+            <Row>
+              <Col xs={24} md={18}>
+                <div style={{ paddingRight: `${LAYOUT.PADDING}px` }}>
+                  <DendronNote noteContent={noteBody} config={config} />
+                </div>
+                {maybeCollection}
+              </Col>
+              <Col xs={0} md={6}>
+                <DendronTOC note={note} offsetTop={HEADER.HEIGHT} />
+              </Col>
+              <DisqusComments note={note}></DisqusComments>
+            </Row>
+          </Col>
+        </Row>
+      </>
+    );
+  }
+}
+
+export async function genLatestThreeThen(
+  notes: NotePropsDict,
+  id: string,
+  rootId: string
+): Promise<string> {
+  let body = '';
+  let drops: NoteProps | undefined;
+  drops = notes['u4tSbmkJewrKonY3sL544'];
+  // console.log(x);
+
+  // console.log(!drops);
+  if (!drops) {
+    return '';
+  }
+  //若最新年份內<3
+  let latestPrevYearNotes: string[] | undefined = [];
+  let latestYearNotes: string[] | undefined = [];
+
+  latestYearNotes = notes[drops.children[drops.children.length - 1]].children;
+  latestPrevYearNotes =
+    notes[drops.children[drops.children.length - 2]].children;
+
+  // console.log(latestPrevYearNotes);
+  // console.log(latestYearNotes);
+  if (!latestPrevYearNotes.length || !latestYearNotes.length) {
+    return '';
+  }
+
+  if (latestYearNotes!.length < 3) {
+    let prev: { id: string; title: string } = {
+      id: '',
+      title: '',
+    };
+    let latestSec: { id: string; title: string } = {
+      id: '',
+      title: '',
+    };
+    let latest: { id: string; title: string } = {
+      id: '',
+      title: '',
+    };
+
+    let latestIds: { id: string; title: string }[] = [];
+
+    prev = notes[latestPrevYearNotes![latestPrevYearNotes.length - 1]];
+    latestSec = notes[latestYearNotes![0]];
+    latest = notes[latestYearNotes![1]];
+
+    latestIds.push({
+      id: latest.id,
+      title: latest.title,
+    });
+    latestIds.push({
+      id: latestSec.id,
+      title: latestSec.title,
+    });
+    latestIds.push({
+      id: prev.id,
+      title: prev.title,
+    });
+
+    let threeLatest = '';
+    if (id === rootId) {
+      // console.log(latestIds);
+      latestIds.map((obj) => {
+        threeLatest =
+          threeLatest +
+          `<div class="portal-container">
+                  <div class="portal-head">
+                  <div class="portal-backlink">
+                  <div class="portal-title"><span class="portal-text-title">${obj.title}</span></div>
+                  <a href="/notes/${obj.id}" class="portal-arrow">Go to text <span class="right-arrow">→</span></a>
+                  </div>
+                  </div>
+                  <div id="portal-parent-anchor" class="portal-parent" markdown="1">
+                  <div class="portal-parent-fader-top"></div>
+                  </div></div>
+                  `;
+      });
+
+      body = `<p style="margin-top: 20px;">最新文章</p>
+                ${threeLatest}
+                <hr>
+                <h2 id="children"><a aria-hidden="true" class="anchor-heading" href="#children"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Children</h2>
+                <ol>
+                <li><a href="/notes/u4tSbmkJewrKonY3sL544">Drops</a></li>
+                <li><a href="/notes/rEbR1FrKkZzyjo6ahAgm3">Tags</a></li>
+                <li><a href="/notes/Cybv0wy1d2NbWoMaJ9Xst">pending notes</a></li>
+                </ol>`;
+
+      return Promise.resolve(body);
+    }
+  } else {
+    let latestThrid: { id: string; title: string } = {
+      id: '',
+      title: '',
+    };
+    let latestSec: { id: string; title: string } = {
+      id: '',
+      title: '',
+    };
+    let latest: { id: string; title: string } = {
+      id: '',
+      title: '',
+    };
+
+    let latestIds: { id: string; title: string }[] = [];
+
+    latestThrid = notes[latestYearNotes![latestYearNotes!.length - 3]];
+    latestSec = notes[latestYearNotes![latestYearNotes!.length - 2]];
+    latest = notes[latestYearNotes![latestYearNotes!.length - 1]];
+
+    latestIds.push({
+      id: latest.id,
+      title: latest.title,
+    });
+    latestIds.push({
+      id: latestSec.id,
+      title: latestSec.title,
+    });
+    latestIds.push({
+      id: latestThrid.id,
+      title: latestThrid.title,
+    });
+
+    let threeLatest = '';
+    if (id === rootId) {
+      // console.log(latestIds);
+      latestIds.map((obj) => {
+        threeLatest =
+          threeLatest +
+          `<div class="portal-container">
+                <div class="portal-head">
+                <div class="portal-backlink">
+                <div class="portal-title">From <span class="portal-text-title">${obj.title}</span></div>
+                <a href="/notes/${obj.id}" class="portal-arrow">Go to text <span class="right-arrow">→</span></a>
+                </div>
+                </div>
+                <div id="portal-parent-anchor" class="portal-parent" markdown="1">
+                <div class="portal-parent-fader-top"></div>
+                <div class="portal-parent-fader-bottom"></div><h2 id="使用-dendron-紀錄"><a aria-hidden="true" class="anchor-heading" href="#使用-dendron-紀錄"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>使用 Dendron 紀錄</h2>
+                </div></div>
+                `;
+      });
+
+      body = `<h1 id="-φ-w-φ-"><a aria-hidden="true" class="anchor-heading" href="#-φ-w-φ-"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>( Φ w Φ )</h1>
+              <p>Dendron 官網: <a href="https://wiki.dendron.so/">https://wiki.dendron.so/</a></p>
+              ${threeLatest}
+              <hr>
+              <h2 id="children"><a aria-hidden="true" class="anchor-heading" href="#children"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Children</h2>
+              <ol>
+              <li><a href="/notes/u4tSbmkJewrKonY3sL544">Drops</a></li>
+              <li><a href="/notes/rEbR1FrKkZzyjo6ahAgm3">Tags</a></li>
+              <li><a href="/notes/Cybv0wy1d2NbWoMaJ9Xst">pending notes</a></li>
+              </ol>`;
+
+      return Promise.resolve(body);
+    }
+  }
+  return Promise.resolve('');
 }

@@ -14,7 +14,7 @@ const DisqusComments = (noteObj: any) => {
   }
   const url = getRootUrl(engine.config.site);
   const { note } = noteObj;
-  console.log(note);
+  // console.log(note);
   if (note.custom.status === 'w') {
     return (
       <span style={{ fontSize: '14px', color: 'lightgrey' }}>
@@ -38,7 +38,7 @@ const DisqusComments = (noteObj: any) => {
     note.id === 'root' ||
     note.parent === 'root' ||
     note.custom?.stub === true ||
-    note.id === '03vN8OL5CrZW9GX2NX7oS' ||
+    note.id === 'about' ||
     note.fname.split('.')[0] === 'tags' ||
     note.fname.split('.')[0] === '0drops'
   ) {
