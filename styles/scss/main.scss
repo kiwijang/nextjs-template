@@ -26,7 +26,7 @@ $text-color: #111 !default;
 }
 
 #__nextLayout {
-  position: absolute;
+  position: fixed;
   overflow: hidden;
   opacity: 0;
   top: 0;
@@ -224,6 +224,7 @@ li code {
   font-size: 14px;
   margin: 0 2px;
   color: indianred;
+  word-break: break-all;
 }
 
 pre > code[class*='language-'] {
