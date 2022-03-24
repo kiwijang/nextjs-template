@@ -240,6 +240,7 @@ export async function genLatestThreeThen(
                 <h2 id="children"><a aria-hidden="true" class="anchor-heading" href="#children"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Children</h2>
                 <ol>
                 <li><a href="/notes/u4tSbmkJewrKonY3sL544">Drops</a></li>
+                <li><a href="/notes/WAKWMq3SeVmlAmZRqCbpB">Other</a></li>
                 <li><a href="/notes/rEbR1FrKkZzyjo6ahAgm3">Tags</a></li>
                 <li><a href="/notes/Cybv0wy1d2NbWoMaJ9Xst">pending notes</a></li>
                 </ol>`;
@@ -286,29 +287,28 @@ export async function genLatestThreeThen(
         threeLatest =
           threeLatest +
           `<div class="portal-container">
-                <div class="portal-head">
-                <div class="portal-backlink">
-                <div class="portal-title">From <span class="portal-text-title">${obj.title}</span></div>
-                <a href="/notes/${obj.id}" class="portal-arrow">Go to text <span class="right-arrow">→</span></a>
-                </div>
-                </div>
-                <div id="portal-parent-anchor" class="portal-parent" markdown="1">
-                <div class="portal-parent-fader-top"></div>
-                <div class="portal-parent-fader-bottom"></div><h2 id="使用-dendron-紀錄"><a aria-hidden="true" class="anchor-heading" href="#使用-dendron-紀錄"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>使用 Dendron 紀錄</h2>
-                </div></div>
-                `;
+                  <div class="portal-head">
+                  <div class="portal-backlink">
+                  <div class="portal-title"><span class="portal-text-title">${obj.title}</span></div>
+                  <a href="/notes/${obj.id}" class="portal-arrow">Go to text <span class="right-arrow">→</span></a>
+                  </div>
+                  </div>
+                  <div id="portal-parent-anchor" class="portal-parent" markdown="1">
+                  <div class="portal-parent-fader-top"></div>
+                  </div></div>
+                  `;
       });
 
-      body = `<h1 id="-φ-w-φ-"><a aria-hidden="true" class="anchor-heading" href="#-φ-w-φ-"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>( Φ w Φ )</h1>
-              <p>Dendron 官網: <a href="https://wiki.dendron.so/">https://wiki.dendron.so/</a></p>
-              ${threeLatest}
-              <hr>
-              <h2 id="children"><a aria-hidden="true" class="anchor-heading" href="#children"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Children</h2>
-              <ol>
-              <li><a href="/notes/u4tSbmkJewrKonY3sL544">Drops</a></li>
-              <li><a href="/notes/rEbR1FrKkZzyjo6ahAgm3">Tags</a></li>
-              <li><a href="/notes/Cybv0wy1d2NbWoMaJ9Xst">pending notes</a></li>
-              </ol>`;
+      body = `<p style="margin-top: 20px;">最新文章</p>
+                ${threeLatest}
+                <hr>
+                <h2 id="children"><a aria-hidden="true" class="anchor-heading" href="#children"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Children</h2>
+                <ol>
+                <li><a href="/notes/u4tSbmkJewrKonY3sL544">Drops</a></li>
+                <li><a href="/notes/WAKWMq3SeVmlAmZRqCbpB">Other</a></li>
+                <li><a href="/notes/rEbR1FrKkZzyjo6ahAgm3">Tags</a></li>
+                <li><a href="/notes/Cybv0wy1d2NbWoMaJ9Xst">pending notes</a></li>
+                </ol>`;
 
       return Promise.resolve(body);
     }
