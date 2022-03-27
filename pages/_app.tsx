@@ -77,6 +77,7 @@ function DendronApp({ Component, pageProps }: AppProps) {
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5555097176407757"
           crossOrigin="anonymous"
         ></script>
+        <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap" rel="stylesheet"></link>
       </Head>
       <Component
         {...pageProps}

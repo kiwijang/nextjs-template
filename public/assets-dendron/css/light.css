@@ -1391,8 +1391,7 @@ kbd,
 pre,
 samp {
   font-size: 1em;
-  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier,
-    monospace;
+  font-family: 'Nanum Gothic Coding', monospace;
 }
 pre {
   margin-top: 0;
@@ -19827,20 +19826,20 @@ span.ant-transfer-list-search-action {
   width: 12px;
   height: 12px;
   margin-top: -6px;
-  color: rgba(0, 0, 0, 0.25);
+  color: #aaa;
+  background-color: transparent;
   font-size: 12px;
   font-style: normal;
   line-height: 1;
   text-align: center;
   text-transform: none;
-  background: #fff;
   cursor: pointer;
   opacity: 0;
   transition: color 0.3s ease, opacity 0.15s ease;
   text-rendering: auto;
 }
 .ant-select-clear:hover {
-  color: rgba(0, 0, 0, 0.45);
+  color: #9a6e3a;
 }
 .ant-select:hover .ant-select-clear {
   opacity: 1;
@@ -19865,6 +19864,7 @@ span.ant-transfer-list-search-action {
   outline: 0;
   box-shadow: 0 3px 6px -4px rgba(0, 0, 0, 0.12),
     0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 9px 28px 8px rgba(0, 0, 0, 0.05);
+  min-width: 500px !important;
   width: 100% !important;
 }
 .ant-select-dropdown.ant-slide-up-appear.ant-slide-up-appear-active.ant-select-dropdown-placement-bottomLeft,
@@ -25477,6 +25477,7 @@ div.ant-typography-edit-content {
   padding: 0.4em 0.6em;
   white-space: pre-wrap;
   word-wrap: break-word;
+  font-family: 'Nanum Gothic Coding', monospace;
   background: rgba(150, 150, 150, 0.1);
   border: 1px solid rgba(100, 100, 100, 0.2);
   border-radius: 3px;
@@ -25486,7 +25487,7 @@ div.ant-typography-edit-content {
   margin: 0;
   padding: 0;
   font-size: inherit;
-  font-family: inherit;
+  font-family: 'Nanum Gothic Coding', monospace;
   background: 0 0;
   border: 0;
 }
@@ -26206,7 +26207,7 @@ pre[class*="language-"] {
   color: black;
   background: none;
   text-shadow: 0 1px white;
-  font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
+  font-family:'Nanum Gothic Coding', monospace;
   font-size: 0.9rem;
   text-align: left;
   white-space: pre;
