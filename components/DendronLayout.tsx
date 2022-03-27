@@ -30,7 +30,7 @@ export default function DendronLayout(
       onCollapse={(collapsed) => {
         setCollapsed(collapsed);
       }}
-      breakpoint="sm"
+      breakpoint="xl"
       onBreakpoint={(broken) => {
         setResponsive(broken);
       }}
@@ -115,13 +115,14 @@ export default function DendronLayout(
         <Row justify="center">
           <Col
             xs={0}
-            sm={18}
-            md={18}
-            lg={16}
+            sm={5}
+            md={5}
+            lg={5}
             className="gutter-row"
             id="my-search"
             style={{
               maxWidth: '992px',
+              marginRight: 50,
             }}
           >
             <DendronSearch {...props} />
@@ -154,16 +155,14 @@ export default function DendronLayout(
             className="site-layout-sidebar"
             style={{
               flex: '0 0 auto',
-              width: `calc((100% - ${LAYOUT.BREAKPOINTS.xl}) / 2 + ${
+              width:
                 // eslint-disable-next-line no-nested-ternary
                 isResponsive
                   ? isCollapsed
                     ? SIDER.COLLAPSED_WIDTH
                     : '100%'
-                  : SIDER.WIDTH
-              }px)`,
+                  : SIDER.WIDTH,
               minWidth: isResponsive || isCollapsed ? 0 : SIDER.WIDTH,
-              paddingLeft: `calc((100% - ${LAYOUT.BREAKPOINTS.xl}) / 2)`,
               // eslint-disable-next-line no-nested-ternary
             }}
           >

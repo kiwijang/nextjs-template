@@ -87,6 +87,7 @@ function DendronSearchComponent(
     []
   );
   const [results, setResults] = React.useState<SearchMode>();
+  const [isResponsive, setResponsive] = React.useState(false);
   const dispatch = useCombinedDispatch();
   const { noteBodies, requestNotes } = useNoteBodies();
   const lookup = useDendronLookup();
@@ -173,7 +174,11 @@ function DendronSearchComponent(
       {results === SearchMode.SEARCH_MODE
         ? searchResults?.map(({ item: note, matches }) => {
             return (
-              <AutoComplete.Option key={note.id} value={note.fname}>
+              <AutoComplete.Option
+                key={note.id}
+                value={note.fname}
+                style={{ width: 480 }}
+              >
                 <Row justify="center" align="middle">
                   <Col xs={0} md={1}>
                     <div style={{ position: 'relative', top: -12, left: 0 }}>
