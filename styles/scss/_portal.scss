@@ -37,7 +37,6 @@ iframe {
         color: #2a2a2a;
         .portal-text-title {
           font-weight: 700;
-          color: #aaa;
         }
       }
       .portal-arrow {
@@ -51,6 +50,12 @@ iframe {
       }
     }
   }
+
+  .group:hover {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
 
   .portal-iframe {
     overflow: hidden;

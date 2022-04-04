@@ -222,16 +222,13 @@ export async function genLatestThreeThen(
         threeLatest =
           threeLatest +
           `<div class="portal-container">
-                  <div class="portal-head">
-                  <div class="portal-backlink">
+              <div class="portal-head">
+                <a href="/notes/${obj.id}" class="portal-backlink">
                   <div class="portal-title"><span class="portal-text-title">${obj.title}</span></div>
-                  <a href="/notes/${obj.id}" class="portal-arrow">Go to text <span class="right-arrow">→</span></a>
-                  </div>
-                  </div>
-                  <div id="portal-parent-anchor" class="portal-parent" markdown="1">
-                  <div class="portal-parent-fader-top"></div>
-                  </div></div>
-                  `;
+                  <div class="portal-arrow">Go to text <span class="right-arrow">→</span></div>
+                </a>
+              </div>
+          </div>`;
       });
 
       body = `<p style="margin-top: 20px;">最新文章</p>
@@ -287,16 +284,13 @@ export async function genLatestThreeThen(
         threeLatest =
           threeLatest +
           `<div class="portal-container">
-                  <div class="portal-head">
-                  <div class="portal-backlink">
+              <div class="portal-head group">
+                <a href="/notes/${obj.id}" class="portal-backlink group">
                   <div class="portal-title"><span class="portal-text-title">${obj.title}</span></div>
-                  <a href="/notes/${obj.id}" class="portal-arrow">Go to text <span class="right-arrow">→</span></a>
-                  </div>
-                  </div>
-                  <div id="portal-parent-anchor" class="portal-parent" markdown="1">
-                  <div class="portal-parent-fader-top"></div>
-                  </div></div>
-                  `;
+                  <div class="portal-arrow">Go to text <span class="right-arrow">→</span></div>
+                </a>
+              </div>
+          </div>`;
       });
 
       body = `<p style="margin-top: 20px;">最新文章</p>
