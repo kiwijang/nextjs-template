@@ -27,7 +27,7 @@ export function DendronBreadCrumb(props: DendronCommonProps) {
     notes: props.notes,
   });
   return (
-    <Breadcrumb style={{ margin: "16px 0" }}>
+    <Breadcrumb style={{ margin: "16px 40px 16px 0" }}>
       {_.map(noteParents, (note) => {
         const dest = getNoteUrl({note, noteIndex: props.noteIndex})
         return (

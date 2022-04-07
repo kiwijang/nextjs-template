@@ -15286,7 +15286,9 @@ _:-ms-fullscreen
   flex: auto;
   flex-direction: column;
   min-height: 0;
-  background: #fff;
+  background-color: transparent;
+  background-image: url('/assets/images/evgeni-evgeniev-LPKk3wtkC-g-unsplash.jpg');
+  background-attachment: fixed;
 }
 .ant-layout,
 .ant-layout * {

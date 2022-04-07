@@ -19,6 +19,7 @@ export default function DendronLayout(
   props: React.PropsWithChildren<DendronCommonProps>
 ) {
   const [isCollapsed, setCollapsed] = React.useState(false);
+  /** breakpoint="xl" */
   const [isResponsive, setResponsive] = React.useState(false);
 
   const sidebar = (
@@ -58,15 +59,15 @@ export default function DendronLayout(
       >
         <DendronBreadCrumb {...props} />
         {props.children}
+        <Row style={{ paddingBottom: 56, paddingRight: 40 }}>
+          <FooterText></FooterText>
+        </Row>
       </Content>
-      <Row style={{ paddingLeft: `${LAYOUT.PADDING}px` }}>
-        <FooterText></FooterText>
-      </Row>
-      <Footer
+      {/* <Footer
         style={{
           padding: `0 ${LAYOUT.PADDING}px ${LAYOUT.PADDING}px`,
         }}
-      ></Footer>
+      ></Footer> */}
     </>
   );
 
@@ -150,7 +151,13 @@ export default function DendronLayout(
         </Row>
       </Header>
       <Layout className="site-layout">
-        <Layout className="site-layout" style={{ flexDirection: 'row' }}>
+        <Layout
+          className="site-layout"
+          style={{
+            flexDirection: isResponsive ?  'column' : 'row',
+            justifyContent: isResponsive ? 'flex-start' : 'center',
+          }}
+        >
           <Layout
             className="site-layout-sidebar"
             style={{
@@ -171,14 +178,9 @@ export default function DendronLayout(
           <Layout
             className="side-layout-main"
             style={{
-              maxWidth: `calc(100% - ${
-                // eslint-disable-next-line no-nested-ternary
-                isResponsive
-                  ? isCollapsed
-                    ? SIDER.COLLAPSED_WIDTH + 24
-                    : '100%'
-                  : SIDER.WIDTH + 24
-              }px)`,
+              maxWidth: 1170,
+              backgroundColor: 'white',
+              backgroundImage: 'none',
               display: !isCollapsed && isResponsive ? 'none' : 'initial',
             }}
           >
