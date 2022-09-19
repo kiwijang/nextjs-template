@@ -52,21 +52,21 @@ function DendronApp({ Component, pageProps }: AppProps) {
     (async () => {
       const logLevel = getLogLevel();
       setLogLevel(logLevel);
-      logger.info({ ctx: 'fetchNotes:pre' });
+      // logger.info({ ctx: 'fetchNotes:pre' });
       const data = await fetchNotes();
-      logger.info({ ctx: 'fetchNotes:got-data' });
+      // logger.info({ ctx: 'fetchNotes:got-data' });
       setNoteData(data);
       batch(() => {
         dispatch(browserEngineSlice.actions.setNotes(data.notes));
         dispatch(browserEngineSlice.actions.setNoteIndex(data.noteIndex));
       });
       const config = await fetchConfig();
-      logger.info({ ctx: 'fetchConfig:got-data' });
+      // logger.info({ ctx: 'fetchConfig:got-data' });
       dispatch(browserEngineSlice.actions.setConfig(config));
     })();
   }, []);
 
-  logger.info({ ctx: 'render' });
+  // logger.info({ ctx: 'render' });
 
   return (
     <DendronLayout {...noteData} dendronRouter={dendronRouter}>

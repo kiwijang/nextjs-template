@@ -38,32 +38,32 @@ function DendronTreeView({
     const noteActiveId = _.isUndefined(dendronRouter.query.id)
       ? noteDataProps.noteIndex.id
       : dendronRouter.query.id;
-    logger.info({
-      state: "useEffect:preCalculateTree",
-    });
+    // logger.info({
+    //   state: "useEffect:preCalculateTree",
+    // });
     const _activeNoteIds = TreeViewUtils.getAllParents({
       notes: noteDataProps.notes,
       noteId: noteActiveId,
     });
     setActiveNoteIds(_activeNoteIds);
-    logger.info({
-      state: "useEffect:postCalculateTree",
-      activeNoteIds,
-    });
+    // logger.info({
+    //   state: "useEffect:postCalculateTree",
+    //   activeNoteIds,
+    // });
   }, [notes, dendronRouter.query.id]);
 
   // --- Verify
   if (!verifyNoteData(noteDataProps)) {
-    logger.info({
-      state: "exit:notes not initialized",
-    });
+    // logger.info({
+    //   state: "exit:notes not initialized",
+    // });
     return <DendronSpinner />;
   }
 
   // --- Methods
   const onExpand: OnExpandFunc = (expandedKeys, { node, expanded }) => {
     const id = node.key as string;
-    logger.info({ ctx: "onExpand", expandedKeys, id, expanded });
+    // logger.info({ ctx: "onExpand", expandedKeys, id, expanded });
     if (_.isUndefined(notes)) {
       return;
     }

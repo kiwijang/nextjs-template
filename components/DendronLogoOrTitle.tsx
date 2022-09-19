@@ -11,7 +11,8 @@ export default function DendronLogoOrTitle() {
   if (!verifyEngineSliceState(engine)) {
     return null;
   }
-  const title = engine.config.site.title || "";
+  // const title = engine.config.site.title || "";
+  const title = '/ᐠ ._. ᐟ\✧';
   return (
     <Link href={getRootUrl(engine.config.site)}>
       {/* eslint-disable-next-line jsx-a11y/anchor-is-valid -- `href` will be provided by `Link` */}

@@ -10,7 +10,7 @@ import {
 } from '@dendronhq/common-frontend';
 import { Col, Row } from 'antd';
 import _ from 'lodash';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { DendronCollectionItem } from '../components/DendronCollection';
 import DendronCustomHead from '../components/DendronCustomHead';
 import DendronSEO from '../components/DendronSEO';
@@ -59,14 +59,14 @@ export default function Note({
   // --- Hooks
   const dispatch = useCombinedDispatch();
   const engine = useCombinedSelector((state) => state.engine);
-  logger.info({ ctx: 'enter', id });
+  // logger.info({ ctx: 'enter', id });
   const { isMobile } = useIsMobile();
 
   // setup body
   React.useEffect(() => {
-    logger.info({ ctx: 'updateNoteBody:enter', id });
+    // logger.info({ ctx: 'updateNoteBody:enter', id });
     if (_.isUndefined(id)) {
-      logger.info({ ctx: 'updateNoteBody:exit', id, state: 'id undefined' });
+      // logger.info({ ctx: 'updateNoteBody:exit', id, state: 'id undefined' });
       return;
     }
     // loaded page statically
@@ -74,13 +74,13 @@ export default function Note({
       dispatch(
         browserEngineSlice.actions.setLoadingStatus(LoadingStatus.FULFILLED)
       );
-      logger.info({ ctx: 'updateNoteBody:exit', id, state: 'id = note.id' });
+      // logger.info({ ctx: 'updateNoteBody:exit', id, state: 'id = note.id' });
       return;
     }
-    logger.info({ ctx: 'updateNoteBody:fetch:pre', id });
+    // logger.info({ ctx: 'updateNoteBody:fetch:pre', id });
     // otherwise, dynamically fetch page
     fetch(`/data/notes/${id}.html`).then(async (resp) => {
-      logger.info({ ctx: 'updateNoteBody:fetch:post', id });
+      // logger.info({ ctx: 'updateNoteBody:fetch:post', id });
       const contents = await resp.text();
       setBody(contents);
       dispatch(
@@ -116,6 +116,255 @@ export default function Note({
                     noteContent={rootBody ? rootBody : ''}
                     config={config}
                   />
+                </div>
+                {maybeCollection}
+              </Col>
+              <Col xs={0} md={6}>
+                <DendronTOC note={note} offsetTop={HEADER.HEIGHT} />
+              </Col>
+              <DisqusComments note={note}></DisqusComments>
+            </Row>
+          </Col>
+        </Row>
+      </>
+    );
+  } else if (id = 'about') {     
+    // logger.info({ ctx: 'noteBody', noteBody });
+    const youtubeScript = `
+    <script type="text/javascript" id="www-widgetapi-script" src="https://s.ytimg.com/yts/jsbin/www-widgetapi-vflS50iB-/www-widgetapi.js" async=""></script>
+    <script src="https://www.youtube.com/player_api"></script>
+    <script>
+     try {
+      execute();
+  } catch(error) {
+    if (error instanceof ReferenceError) {
+      console.log(error)
+    } else {
+      console.log('Caught some other error.');
+    }
+  }
+
+  function execute() {
+    let player;
+    let duration = 0;
+    let currentTime = 0;
+    let isMuted = true;
+    let yt = null;
+    let isSetup = true;
+    let repeat = true;
+    let firstTime = true;    
+    let clock1 = null;
+    
+    if (window.location.href.split('/').includes('about')) {
+      document.addEventListener('DOMContentLoaded', (event) => {
+        console.log('goRepeat')
+        goRepeat();
+
+        if(document.getElementById('about')) {
+          
+          document.getElementById('bar-wrap').addEventListener('click',(e) => {
+            console.log('ccc')
+            const x = e.offsetX;
+            let seekToTime = 0;
+            const barWidth =  e.target.offsetWidth;
+            if (player) {
+              duration = player.getDuration();
+              seekToTime = Math.floor(x/barWidth*duration);
+              player.seekTo(seekToTime);
+            }        
+              
+            currentTime = yt? (yt.playerInfo? yt.playerInfo.currentTime : player.getCurrentTime()) : player.getCurrentTime();
+            document.getElementById('bar').style.width = String(currentTime / duration * 100)+'%';
+          });          
+              
+          if (firstTime) {
+            const updTimeLine = setInterval(() => {
+              console.log('upd')
+              if(!document.getElementById('bar')) {
+                clearInterval(updTimeLine);
+                return;
+              }
+              currentTime = yt? (yt.playerInfo? yt.playerInfo.currentTime : player.getCurrentTime()) : player.getCurrentTime();
+              document.getElementById('bar').style.width = String(currentTime / duration * 100)+'%';
+            }, 1000);
+
+            firstTime = false;
+          }
+        }
+        
+        window.stopVideo = stopVideo;
+        window.mute = mute;
+        window.unMute = unMute;
+        window.playMyVedio = playMyVedio;
+        window.pauseVideo = pauseVideo;
+        window.onYouTubePlayerAPIReady = onYouTubeIframeAPIReady;
+        window.onPlayerReady = onPlayerReady;
+      });    
+    }
+    
+    function goRepeat() {        
+      if (!document.getElementById('about')) { 
+        repeat = true;         
+        clock1 = setInterval( ()=> {
+            if (isSetup) {
+              isSetup = false;
+              setup();
+            }
+            if (repeat) {
+              repeat = false;
+              goRepeat();
+            }
+        }, 500);
+        return;
+      } else {
+        if (clock1) {
+          clearInterval(clock1);
+        }
+
+        document.getElementById('bar-wrap').addEventListener('click',(e) => {
+          console.log('ccc')
+          const x = e.offsetX;
+          let seekToTime = 0;
+          const barWidth =  e.target.offsetWidth;
+          if (player) {
+            duration = player.getDuration();
+            seekToTime = Math.floor(x/barWidth*duration);
+            player.seekTo(seekToTime);
+          }        
+            
+          currentTime = yt? (yt.playerInfo? yt.playerInfo.currentTime : player.getCurrentTime()) : player.getCurrentTime();
+          document.getElementById('bar').style.width = String(currentTime / duration * 100)+'%';
+        });          
+            
+        if (firstTime) {
+          const updTimeLine = setInterval(() => {
+            console.log('upd')
+            if(!document.getElementById('bar')) {
+              clearInterval(updTimeLine);
+              return;
+            }
+            currentTime = yt? (yt.playerInfo? yt.playerInfo.currentTime : player.getCurrentTime()) : player.getCurrentTime();
+            document.getElementById('bar').style.width = String(currentTime / duration * 100)+'%';
+          }, 1000);
+
+          firstTime = false;
+        }
+      }
+    }
+
+    function setup() {          
+        if (typeof(YT) == 'undefined' || typeof(YT.Player) == 'undefined') {
+
+            // 2. This code loads the IFrame Player API code asynchronously.
+            const tag = document.createElement('script');    
+            tag.src = 'https://www.youtube.com/iframe_api';
+            const firstScriptTag = document.getElementsByTagName('script')[0];
+            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        }
+
+        onYouTubeIframeAPIReady();
+    }
+
+    
+    // 3. This function creates an <iframe> (and YouTube player)
+    //    after the API code downloads.
+    function onYouTubeIframeAPIReady() {
+      yt = new YT.Player('player', {
+        height: '100',
+        width: '250',
+        videoId: 'GTlQhMRHXIg',
+        playerVars: {
+          autoplay: 0,
+          controls: 0,
+          loop: 1,
+          playsinline: 1,
+          origin: 'https://kiwijang.github.io',
+        },
+        events: {
+          onReady: onPlayerReady,
+        },
+      });
+    }
+
+    // 4. The API will call this function when the video player is ready.
+    function onPlayerReady(event) {
+      isMuted = event.target.isMuted();
+      if (isMuted) {
+        document.getElementById('btn-mute').style.display = 'none';
+        document.getElementById('btn-unMute').style.display = 'flex';
+      } else {
+        document.getElementById('btn-mute').style.display = 'flex';
+        document.getElementById('btn-unMute').style.display = 'none';
+      }
+
+      // event.target.playVideo();
+      player = event.target;
+      // console.log(player)
+
+      window.playMyVedio();
+      window.stopVideo();
+
+      duration = player.getDuration();
+
+      currentTime = yt? (yt.playerInfo? yt.playerInfo.currentTime : player.getCurrentTime()) : player.getCurrentTime();
+      document.getElementById('bar').style.width = String(currentTime/duration*100)+'%';   
+    }
+
+    function stopVideo() {
+      if (!player) return;
+      player.stopVideo();
+    }
+  
+    function pauseVideo() {
+      if (!player) return;
+      player.pauseVideo();
+    }
+  
+    function playMyVedio() {
+      if (!player) return;
+      player.playVideo();
+    }
+  
+    function unMute() {
+      checkIsMuted();
+    }
+  
+    function mute() {
+      checkIsMuted();
+    }
+  
+    function checkIsMuted() {
+      if (!player) return;
+  
+      if (document.getElementById('btn-mute').style.display !== 'flex') {
+        document.getElementById('btn-mute').style.display = 'flex';
+        document.getElementById('btn-unMute').style.display = 'none';
+        
+        player.unMute();
+      } else {
+        document.getElementById('btn-mute').style.display = 'none';
+        document.getElementById('btn-unMute').style.display = 'flex';
+        
+        player.mute();
+      }
+    }
+      
+  }
+  
+    </script>`;
+    return (
+      <>
+        <DendronSEO note={note} config={config} />
+        {youtubeScript && <DendronCustomHead content={youtubeScript} />}
+        <Row>
+          <Col span={24}>
+            <Row>
+              <Col xs={24} md={18}>
+                <div style={{ paddingRight: `${LAYOUT.PADDING}px` }}>
+                  <NoSsr>
+                    <DendronNote noteContent={noteBody} config={config}  />
+                  </NoSsr>
                 </div>
                 {maybeCollection}
               </Col>
@@ -309,3 +558,14 @@ export async function genLatestThreeThen(
   }
   return Promise.resolve('');
 }
+
+
+const NoSsr = ({ children }: any): JSX.Element => {
+  const [isMounted, setMount] = useState(false);
+
+  useEffect(() => {
+    setMount(true);
+  }, []);
+
+  return <>{isMounted ? children : null}</>;
+};

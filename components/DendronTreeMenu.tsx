@@ -31,9 +31,9 @@ export default function DendronTreeMenu(
       return undefined;
     }
 
-    logger.info({
-      state: "useEffect:preCalculateTree",
-    });
+    // logger.info({
+    //   state: "useEffect:preCalculateTree",
+    // });
 
     // all parents should be in expanded position
     const activeNoteIds = TreeViewUtils.getAllParents({
@@ -47,9 +47,9 @@ export default function DendronTreeMenu(
   // --- Verify
   // If no data, show spinner component
   if (!verifyNoteData(props)) {
-    logger.info({
-      state: "exit:notes not initialized",
-    });
+    // logger.info({
+    //   state: "exit:notes not initialized",
+    // });
     return <DendronSpinner />;
   }
 
@@ -72,12 +72,12 @@ export default function DendronTreeMenu(
   // --- Methods
   const onSelect = (noteId: string) => {
     setCollapsed(true);
-    logger.info({ ctx: "onSelect", id: noteId });
+    // logger.info({ ctx: "onSelect", id: noteId });
     changeActiveNote(noteId, { noteIndex: props.noteIndex });
   };
 
   const onExpand = (noteId: string) => {
-    logger.info({ ctx: "onExpand", id: noteId });
+    // logger.info({ ctx: "onExpand", id: noteId });
     if (_.isUndefined(notes)) {
       return;
     }

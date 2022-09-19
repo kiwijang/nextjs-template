@@ -6,7 +6,7 @@ const isProd = process.env.NODE_ENV === "production";
 
 // NOTE: __dirname is the dirname where this configuration file is located
 const payload = {
-  reactStrictMode: true,
+  reactStrictMode: false,
   trailingSlash: true,
   basePath:
     isProd && NEXT_PUBLIC_ASSET_PREFIX ? NEXT_PUBLIC_ASSET_PREFIX : undefined,
