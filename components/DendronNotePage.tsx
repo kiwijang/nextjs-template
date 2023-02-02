@@ -448,20 +448,20 @@ export async function genLatestThreeThen(
     let latestIds: { id: string; title: string }[] = [];
 
     prev = notes[latestPrevYearNotes![latestPrevYearNotes.length - 1]];
-    latestSec = notes[latestYearNotes![0]];
-    latest = notes[latestYearNotes![1]];
+    latestSec = notes[latestPrevYearNotes![latestPrevYearNotes.length - 2]];
+    latest = notes[latestYearNotes![0]];
 
     latestIds.push({
-      id: latest.id,
-      title: latest.title,
+      id: latest?.id,
+      title: latest?.title,
     });
     latestIds.push({
-      id: latestSec.id,
-      title: latestSec.title,
+      id: latestSec?.id,
+      title: latestSec?.title,
     });
     latestIds.push({
-      id: prev.id,
-      title: prev.title,
+      id: prev?.id,
+      title: prev?.title,
     });
 
     let threeLatest = '';
@@ -472,8 +472,8 @@ export async function genLatestThreeThen(
           threeLatest +
           `<div class="portal-container">
               <div class="portal-head">
-                <a href="/notes/${obj.id}" class="portal-backlink">
-                  <div class="portal-title"><span class="portal-text-title">${obj.title}</span></div>
+                <a href="/notes/${obj?.id}" class="portal-backlink">
+                  <div class="portal-title"><span class="portal-text-title">${obj?.title}</span></div>
                   <div class="portal-arrow">Go to text <span class="right-arrow">→</span></div>
                 </a>
               </div>
@@ -514,16 +514,16 @@ export async function genLatestThreeThen(
     latest = notes[latestYearNotes![latestYearNotes!.length - 1]];
 
     latestIds.push({
-      id: latest.id,
-      title: latest.title,
+      id: latest?.id,
+      title: latest?.title,
     });
     latestIds.push({
-      id: latestSec.id,
-      title: latestSec.title,
+      id: latestSec?.id,
+      title: latestSec?.title,
     });
     latestIds.push({
-      id: latestThrid.id,
-      title: latestThrid.title,
+      id: latestThrid?.id,
+      title: latestThrid?.title,
     });
 
     let threeLatest = '';
@@ -534,8 +534,8 @@ export async function genLatestThreeThen(
           threeLatest +
           `<div class="portal-container">
               <div class="portal-head group">
-                <a href="/notes/${obj.id}" class="portal-backlink group">
-                  <div class="portal-title"><span class="portal-text-title">${obj.title}</span></div>
+                <a href="/notes/${obj?.id}" class="portal-backlink group">
+                  <div class="portal-title"><span class="portal-text-title">${obj?.title}</span></div>
                   <div class="portal-arrow">Go to text <span class="right-arrow">→</span></div>
                 </a>
               </div>
