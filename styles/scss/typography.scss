@@ -21,10 +21,13 @@ h3,
 
 h4,
 .text-delta {
-  @include fs-2;
-  font-weight: 400;
+  @include fs-4;
+  // font-weight: 400;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  // letter-spacing: 0.1em;    
+  margin: 12px 0 5px 0 !important;
+  display: inline-block;
+  border-bottom: 1px solid black;
 }
 
 h5,
