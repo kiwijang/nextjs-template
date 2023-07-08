@@ -368,12 +368,7 @@ export default function Note({
             wrapArticle.classList.remove("show");
             wrapArticle.classList.add("hide");
           }
-        };   
-        window.onbeforeunload = () => {
-          console.log('hi')
-          ele.removeEventListener('change', inputChange);
-        };
-        
+        };        
       });
     },0);
   }
