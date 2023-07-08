@@ -354,8 +354,6 @@ export default function Note({
 
   if (window.location.href.split('/').includes('1hmguwjh0m2q4slup1xcg03')) {
     document.addEventListener('DOMContentLoaded', (event) => {
-      setTimeout(()=>{
-
         const ele = document.getElementById('my-input');
         const wrapArticle = document.getElementById('wrapArticle');
         if(!ele || !wrapArticle) return;
@@ -363,14 +361,11 @@ export default function Note({
         function inputChange(){
           if(ele.value==='hello'){
             wrapArticle.classList.remove("hide");
-            wrapArticle.classList.add("show");
           } else {
-            wrapArticle.classList.remove("show");
             wrapArticle.classList.add("hide");
           }
         };        
       });
-    },0);
   }
     </script>`;
     return (
