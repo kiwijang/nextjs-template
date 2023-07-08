@@ -98,8 +98,8 @@ export default function Note({
   const maybeCollection =
     note.custom?.has_collection && !_.isNull(collectionChildren)
       ? collectionChildren.map((child: NoteProps) =>
-          DendronCollectionItem({ note: child, noteIndex })
-        )
+        DendronCollectionItem({ note: child, noteIndex })
+      )
       : null;
 
   if (id === rootId) {
@@ -128,7 +128,7 @@ export default function Note({
         </Row>
       </>
     );
-  } else if (id = 'about') {     
+  } else if (id = 'about') {
     // logger.info({ ctx: 'noteBody', noteBody });
     const youtubeScript = `
     <script type="text/javascript" id="www-widgetapi-script" src="https://s.ytimg.com/yts/jsbin/www-widgetapi-vflS50iB-/www-widgetapi.js" async=""></script>
@@ -351,7 +351,32 @@ export default function Note({
     }
       
   }
-  
+
+  if (window.location.href.split('/').includes('1hmguwjh0m2q4slup1xcg03')) {
+    document.addEventListener('DOMContentLoaded', (event) => {
+      setTimeout(()=>{
+
+        const ele = document.getElementById('my-input');
+        const wrapArticle = document.getElementById('wrapArticle');
+        if(!ele || !wrapArticle) return;
+        ele.addEventListener('change', inputChange);
+        function inputChange(){
+          if(ele.value==='hello'){
+            wrapArticle.classList.remove("hide");
+            wrapArticle.classList.add("show");
+          } else {
+            wrapArticle.classList.remove("show");
+            wrapArticle.classList.add("hide");
+          }
+        };   
+        window.onbeforeunload = () => {
+          console.log('hi')
+          ele.removeEventListener('change', inputChange);
+        };
+        
+      });
+    },0);
+  }
     </script>`;
     return (
       <>
@@ -363,7 +388,7 @@ export default function Note({
               <Col xs={24} md={18}>
                 <div style={{ paddingRight: `${LAYOUT.PADDING}px` }}>
                   <NoSsr>
-                    <DendronNote noteContent={noteBody} config={config}  />
+                    <DendronNote noteContent={noteBody} config={config} />
                   </NoSsr>
                 </div>
                 {maybeCollection}
